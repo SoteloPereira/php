@@ -98,3 +98,9 @@ aqui es importante entender que php funcion SINCRONO, es decir va linea por line
 por tanto para entregarle el valor de la imagen que obtendremos de la api a un <img no tendremos problemas ya que no renderizará ese elemento
 hasta que ya haya obtenido la data
 
+
+Ya luego de haber trabajado la data podemos hacer el deploy
+para eso creamos un repositorio en github, y hacemos el remote de nuestro repo en github en el local
+en nuestro repo hacemos el add, commit y push para subirlo
+
+Lo mas rapido, barato y eficiente para subir proyectos en php es zeabur.com

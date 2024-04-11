@@ -178,6 +178,7 @@ curl_close($ch);
         <h3><?= $data['title']?> se estrena en  <?= $data['days_until'] ?> días! </h3>
         <p>Fecha de estreno es: <?= $data['release_date'] ?></p>
         <p>La siguiente pelicula es: <strong><?= $data['following_production']['title'] ?></strong></p>
+        <p>Resumen: <?= $data['following_production']['overview']?></p>
     </hgroup>
 </main>
 
