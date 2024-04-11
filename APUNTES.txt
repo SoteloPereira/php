@@ -1,0 +1,100 @@
+Curso PHP 8 (midu)
+
+Tiene casi 30 años, la ultima versión el 8.3.4
+Es uno de los lenguajes mas populares del mundo, 3 de 4 paginas server Side (ósea que tienen servidor) ocupan PHP.
+Cada Wordpress utiliza php
+Laravel es el framework mas famoso de PHP, esta también symfony
+Tiene una documentación buena ya que esta en español, y la instalación (en Mac) la podemos hacer con homebrew (administrador de paquetes).
+Se puede instalar también con WampServer, que viene con apache, php, mysql. También Xampp
+
+Extensiones:
+
+PHP intelephense -> nos permite formatear el codigo, ver errores. Pero para que funcione tenemos que deshabilitar una que viene por defecto.
+Colocamos en el buscador @builtin php y "caracteristicas del lenguaje" la inhabilitamos.
+
+Todos los archivos de php tienen extension .php
+Para ver la version usamos php -v y con php --help podremos ver los comandos disponibles.
+
+Para mostrar mensajes por consola usaremos echo, un ejemplo de su uso seria colocar en la terminal
+php -r "echo 'Hola gente';" , y veremos la salida con el mensaje entre comillas simples.
+
+Para escribir codigo php en el fichero (index.php) necesitamos agregar unas etiquetas especiales para que tome la sintaxis del codigo.
+tenemos que envolver el codigo entre <?php  aqui el codigo ?>
+
+Para ejecutar un archivo usaremos: php index.php
+
+Para levantarlo de manera local (desarrollo) podemos usar el comando de server -S (Run with built-in web server.) indicando la direccion y el puerto
+php -S localhost:8001
+
+abrir en el navegador http://localhost:8001
+
+En este caso el echo mostrará el mensaje en el navegador y no en la consola, esto debido a que entiende que donde queremos mostrar el mensaje es en la pagina y no en la consola.
+
+Una de las gracias es que podemos mezclar html, php, javascript en la misma pagina.
+
+Para evitar usar el echo constantemente, hay una forma corta para mostrar:
+<h1> <?= "Mensaje a mostrar!" ; ?> </h1>
+
+Como definir una variable? tenemos que anteponer signo $
+no podemos poner un numero al principio
+no podemos usar simbolos al principio
+no podemos poner $ al final ni al medio del nombre
+
+La asignacion se hace con el signo = y se le puede asignar cualquier valor.
+
+Tiene un tipado dinamico, no tenemos que definir el tipo de dato que le estamos pasando ya que lo detecta solo.
+Es un tipado debil, que leer el valor y lo convierte , por ejemplo si colocamos un string '39' y lo sumamos, php lo considerará numero y lo sumara igualmente.
+Esto considerando tambien que el signo + no sirve para concatenar cadenas de texto, solo hace la suma de numeros.
+Para concatenar texto se utiliza el punto (.)
+Y es gradual, en ciertos contextos se puede indicar el tipo de las variables lo que es opcional.
+
+var_dump, nos va  a decir el tipo de dato y el valor del dato en ese momento
+var_dump($name) -> dira que es un string y su largo
+Pero var_dump se muestra en este caso en el navegador ya que es la salida (y generalmente se muestran los errores tambien)
+por ello hay que configurar para que esto no se vea en el ambiente de produccion.
+
+Si queremos saber el tipo de dato, usamos gettype (para verlo usar el echo), pero hay otros muchos metodos que permiten saber si el tipo es o no Como
+is_string($name) --> validará si es o no string, is_array,y asi varios otros metodos
+
+Al concatenar aunque este en multilinea se leerá como una unica linea, para hacer el salto hay que hacer un break (<br/>) el problema de esto es que a php
+como acepta html se le puede hacer inyecciones, pudiendo un usuario por medio de un input enviarnos un script y si no lo controlamos y lo procesamos
+nos podrian atacar la pagina obteniendo info sensible.
+
+php necesita los ; porque cuando evalua el codigo, hace solo una linea y si no los tiene se produce el error al leer el codigo.
+
+podemos escapar simbolos (hacer que se muestren dentro de una string/texto) usando la contra barra (option + ? ), o tambien las comillas simples
+
+Las variables se pueden volver a asignar y cambiar su valor sin restriccion, por ello tambien estan las 
+constantes en PHP:
+Estas se definen a nivel global como:
+define('nombreVariable', 'valorVariable');
+
+como toda constante si le intentamos asignar un nuevo valor luego de definirla nos mostrará un error el editor, pero igualmente levanta el proyecto, por lo que lo podriamos controlar 
+eventualmente, sin embargo lo mejor es tener un solo archivo como globals.php const.php o algo asi y no en medio de los archivos para evitar el problema.
+
+tambien las podemos definir a nivel local:
+
+const NOMBRE = 'Andres'
+
+Sin embargo las constantes no funcionan en tiempo de ejecucion, esto quiere decir que no las podriamos usar dentro de un bucle ya que son dinamicas.
+Que no dependan de ser definidas en tiempo de ejecucion
+
+Para usar html en un if podemos usar echo en el bloque pero habria que hacer una echo por cada linea y es un caos, para eso es mejor usar la sintaxis de puntos que permite
+agregar cuanto html queramos, pero el unico pero es que si hacemos un else if este debe ir junto (elseif) y debemos cerrar con un endif
+
+<?php if(condicion) : ?>
+    aqui iria toooodo el html sin usar el echo
+<?php elseif (otraCondicion) : ?>
+    mas html segun el caso
+<?php endif ?>
+
+match > switch 
+Es mas nuevo, mas simple y potente que el switch
+
+vamos a usar una api la que indica cual sera la proxima pelicula de marvel, nos entregará info como el nombre, imagen, etc
+para ello usamos curl que es el comando nativo de php para hacer llamadas a apis
+ya habiendo realizado la llamada obtendremos la data y la podremos usar para mostrarla con html
+aqui es importante entender que php funcion SINCRONO, es decir va linea por linea y hasta que no termine una no avanza a la otra.
+por tanto para entregarle el valor de la imagen que obtendremos de la api a un <img no tendremos problemas ya que no renderizará ese elemento
+hasta que ya haya obtenido la data
+
